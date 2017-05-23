@@ -239,5 +239,25 @@ namespace GameOfLife
             generations++;
             gpUniv.Invalidate();
         }
+
+        private void newToolStripButton_Click(object sender, EventArgs e)
+        {
+            univ = new universe(50, 50);
+            generations = 0;
+            gpUniv.Invalidate();
+            timer1.Stop();
+        }
+
+        private void pasteToolStripButton_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void cutToolStripButton_Click(object sender, EventArgs e)
+        {
+            univ.nextGen();
+            generations++;
+            gpUniv.Invalidate();
+        }
     }
 }
