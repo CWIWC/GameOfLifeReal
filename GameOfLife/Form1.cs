@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -217,6 +218,17 @@ namespace GameOfLife
         {
             univ.nextGen();
             generations++;
+            label1.Text = "generations: " + generations;
+            int living = 0;
+            for (int y = 0; y < univ.Max_Y; y++)
+            {
+                for (int x = 0; x < univ.Max_X; x++)
+                {
+                    if (univ.cells[x, y].State == true)
+                        living++;
+                }
+            }
+            label2.Text = "Living cells: " + living;
             gpUniv.Invalidate();
         }
 
@@ -258,6 +270,81 @@ namespace GameOfLife
             univ.nextGen();
             generations++;
             gpUniv.Invalidate();
+        }
+
+        private void randomToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Random rand = new Random();
+            for (int y = 0; y < univ.Max_Y; y++)
+            {
+                for (int x = 0; x < univ.Max_X; x++)
+                {
+                    if (rand.Next() % 2 == 1)
+                    {
+                        univ.cells[x, y].State = true;
+                    }
+                }
+            }
+        }
+
+        private void emptyToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int y = 0; y < univ.Max_Y; y++)
+            {
+                for (int x = 0; x < univ.Max_X; x++)
+                {
+                        univ.cells[x, y].State = false;
+                }
+            }
+        }
+
+        private void saveToolStripButton_Click(object sender, EventArgs e)
+        {
+            StreamWriter sw = new StreamWriter("universeSave.txt");
+
+            if(!File.Exists("universeSave.txt"))
+            {
+                File.CreateText("universeSave.txt");
+            }
+
+            for (int y = univ.Max_Y -1; y >= 1; y--)
+            {
+                for (int x = univ.Max_X -1; x >= 1; x--)
+                {
+                    sw.WriteLine(univ.cells[y, x].State);
+                }
+            }
+            sw.Close();
+        }
+
+        private void openToolStripButton_Click(object sender, EventArgs e)
+        {
+            univ = new universe(50, 50);
+            string line;
+            using (StreamReader sr = new StreamReader("universeSave.txt"))
+            {
+                for (int y = 0; y < univ.Max_Y; y++)
+                {
+                    for (int x = 0; x < univ.Max_X; x++)
+                    {
+                        line = sr.ReadLine();
+                        if (line == "True")
+                        {
+                            univ.cells[y, x].State = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

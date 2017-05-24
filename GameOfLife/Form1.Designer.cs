@@ -33,6 +33,9 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.universeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.emptyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
@@ -45,14 +48,15 @@
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.button2 = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.gpUniv = new GameOfLife.graphicsPanel();
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.universeSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.emptyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.randomToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label1 = new System.Windows.Forms.Label();
+            this.gpUniv = new GameOfLife.graphicsPanel();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
+            this.gpUniv.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -77,9 +81,32 @@
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(96, 22);
             this.newToolStripMenuItem.Text = "new";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
+            // 
+            // universeSettingsToolStripMenuItem
+            // 
+            this.universeSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.emptyToolStripMenuItem,
+            this.randomToolStripMenuItem});
+            this.universeSettingsToolStripMenuItem.Name = "universeSettingsToolStripMenuItem";
+            this.universeSettingsToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
+            this.universeSettingsToolStripMenuItem.Text = "Universe settings";
+            // 
+            // emptyToolStripMenuItem
+            // 
+            this.emptyToolStripMenuItem.Name = "emptyToolStripMenuItem";
+            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.emptyToolStripMenuItem.Text = "empty";
+            this.emptyToolStripMenuItem.Click += new System.EventHandler(this.emptyToolStripMenuItem_Click);
+            // 
+            // randomToolStripMenuItem
+            // 
+            this.randomToolStripMenuItem.Name = "randomToolStripMenuItem";
+            this.randomToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.randomToolStripMenuItem.Text = "random";
+            this.randomToolStripMenuItem.Click += new System.EventHandler(this.randomToolStripMenuItem_Click);
             // 
             // button1
             // 
@@ -125,6 +152,7 @@
             this.openToolStripButton.Name = "openToolStripButton";
             this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.openToolStripButton.Text = "&Open";
+            this.openToolStripButton.Click += new System.EventHandler(this.openToolStripButton_Click);
             // 
             // saveToolStripButton
             // 
@@ -134,6 +162,7 @@
             this.saveToolStripButton.Name = "saveToolStripButton";
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
+            this.saveToolStripButton.Click += new System.EventHandler(this.saveToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -188,15 +217,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // gpUniv
-            // 
-            this.gpUniv.Location = new System.Drawing.Point(12, 48);
-            this.gpUniv.Name = "gpUniv";
-            this.gpUniv.Size = new System.Drawing.Size(1050, 504);
-            this.gpUniv.TabIndex = 1;
-            this.gpUniv.Paint += new System.Windows.Forms.PaintEventHandler(this.gpUniv_Paint);
-            this.gpUniv.MouseClick += new System.Windows.Forms.MouseEventHandler(this.clickclickmerp);
-            // 
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(245, 26);
@@ -217,32 +237,51 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // universeSettingsToolStripMenuItem
+            // label1
             // 
-            this.universeSettingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.emptyToolStripMenuItem,
-            this.randomToolStripMenuItem});
-            this.universeSettingsToolStripMenuItem.Name = "universeSettingsToolStripMenuItem";
-            this.universeSettingsToolStripMenuItem.Size = new System.Drawing.Size(108, 20);
-            this.universeSettingsToolStripMenuItem.Text = "Universe settings";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(802, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "label1";
             // 
-            // emptyToolStripMenuItem
+            // gpUniv
             // 
-            this.emptyToolStripMenuItem.Name = "emptyToolStripMenuItem";
-            this.emptyToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.emptyToolStripMenuItem.Text = "empty";
+            this.gpUniv.Controls.Add(this.statusStrip1);
+            this.gpUniv.Location = new System.Drawing.Point(12, 48);
+            this.gpUniv.Name = "gpUniv";
+            this.gpUniv.Size = new System.Drawing.Size(1050, 504);
+            this.gpUniv.TabIndex = 1;
+            this.gpUniv.Paint += new System.Windows.Forms.PaintEventHandler(this.gpUniv_Paint);
+            this.gpUniv.MouseClick += new System.Windows.Forms.MouseEventHandler(this.clickclickmerp);
             // 
-            // randomToolStripMenuItem
+            // statusStrip1
             // 
-            this.randomToolStripMenuItem.Name = "randomToolStripMenuItem";
-            this.randomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.randomToolStripMenuItem.Text = "random";
+            this.statusStrip1.Location = new System.Drawing.Point(0, 482);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1050, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            this.statusStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.statusStrip1_ItemClicked);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(805, 28);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "label2";
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 551);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -257,6 +296,8 @@
             this.menuStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.gpUniv.ResumeLayout(false);
+            this.gpUniv.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -285,6 +326,9 @@
         private System.Windows.Forms.ToolStripMenuItem universeSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem emptyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem randomToolStripMenuItem;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
